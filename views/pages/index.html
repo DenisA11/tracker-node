@@ -1,0 +1,15 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    {% parent %}
+    {% if !user %}
+    <a href="/login">Login</a>
+    <a href="/Register">Register</a>
+    {% else %}
+        <p>You are currently login as {{ user.username  }}  </p>
+        <a href="/logout"></a>
+    {% endif %}
+    <div>
+        home page
+    </div>
+{% endblock %}

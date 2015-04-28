@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+<head>
+    {% block head %}
+        {% include '../partials/head.html' %}
+    {% endblock %}
+</head>
+<body>
+    {% block content %}
+        {% include '../partials/header.html' %}
+    {% endblock %}
+
+    {% block footer %}
+        {% include '../partials/footer.html' %}
+    {% endblock %}
+
+    {% block js %}
+        {% include '../partials/js.html' %}
+    {% endblock %}
+</body>
+</html>
