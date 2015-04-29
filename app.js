@@ -57,8 +57,9 @@ passport.use(new LocalStrategy(
 ));
 //passport.use(new LocalStrategy(Account.authenticate()));
 //passport.use(Account.createStrategy());
-//passport.serializeUser(Account.serializeUser());
-//passport.deserializeUser(Account.deserializeUser());
+passport.serializeUser(Account.serializeUser());
+passport.deserializeUser(Account.deserializeUser());
+/*
 passport.serializeUser(function(user, done) {
     done(null, user);
 });
@@ -66,6 +67,7 @@ passport.serializeUser(function(user, done) {
 passport.deserializeUser(function(user, done) {
     done(null, user);
 });
+*/
 
 //mongoose.connect('mongodb://127.0.0.1:27017/test');
 mongoose.connect('mongodb://den:den@ds035290.mongolab.com:35290/bugsdemodb');
