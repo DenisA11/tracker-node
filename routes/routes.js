@@ -6,19 +6,18 @@ var express = require('express'),
     Account = require('../models/account');
 
 
-
 router.get('/', function (req, res) {
-    res.render('pages/index', { user : req.user  });
+    res.render('index', {user: req.user});
 });
 
-router.get('/register', function(req, res) {
-    res.render('pages/register', { });
+router.get('/register', function (req, res) {
+    res.render('register', {});
 });
 
-router.post('/register', function(req, res) {
-    Account.register(new Account({ username : req.body.username }), req.body.password, function(err, account) {
+router.post('/register', function (req, res) {
+    Account.register(new Account({username: req.body.username}), req.body.password, function (err, account) {
         if (err) {
-            return res.render('pages/register', { account : account });
+            return res.render('register', {account: account});
         }
 
         passport.authenticate('local')(req, res, function () {
@@ -27,30 +26,33 @@ router.post('/register', function(req, res) {
     });
 });
 
-router.get('/login', function(req, res) {
-    res.render('pages/login', { user : req.user });
+router.get('/login', function (req, res) {
+    res.render('login', {user: req.user});
 });
 
-router.post('/login', passport.authenticate('local', {failureRedirect: '/'}), function(req, res) {
+router.post('/login',
+    passport.authenticate('local',
+    {
+        successRedirect: '/',
+        failureRedirect: '/login'
+    }
+), function (req, res) {
     res.redirect('/');
 });
 
-router.get('/logout', user.can('auth'), function(req, res) {
+router.get('/logout', user.can('auth'), function (req, res) {
     req.logout();
     res.redirect('/');
 });
 router.get('/about', user.can('auth'), function (req, res, next) {
-    res.render('pages/about');
+    res.render('about');
 });
 
 router.get('/users', function (req, res, next) {
     mongoose.model('tracker-users').find(function (err, users) {
         if (err) throw new Error(err);
-        res.render('pages/users', { users:users});
+        res.render('users', {users: users});
     })
-});
-router.get('/ping', function(req, res){
-    res.status(200).send("pong!");
 });
 
 module.exports = router;
